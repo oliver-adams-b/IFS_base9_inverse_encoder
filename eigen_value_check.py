@@ -43,54 +43,55 @@ def dim_fit_estimate_9(A):
     return inv_power(x, a, b, c)
 
 #working on a method to get an 'even' distribution of dimensions in our dataset 
-"""
-def bins(n):
-    dx = 2/n
-    return [[i*dx, (i+1)*dx] for i in range(n)]
 
-def inv_avg_dim_9(dim):
-    a = 0.63910036
-    b = 1.28623336
+def create_evenly_distrbtd_e0():
+    def bins(n):
+        dx = 2/n
+        return [[i*dx, (i+1)*dx] for i in range(n)]
 
-    if dim < 2: 
-        return [np.power((1/a)*np.log(2-dim/2), (1/b))]
-    else: 
-        return None
+    def inv_avg_dim_9(dim):
+        a = 0.63910036
+        b = 1.28623336
 
-k = 10
-l = 1000
-set_of_bins = bins(k)
-set_of_p = [inv_avg_dim_9(bk[0] + 1/k) for bk in set_of_bins]
-set_of_E = [[] for i in range(k)]
-set_of_dims = []
-i=1 #skip the first bin because it's just all zeroes
+        if dim < 2: 
+            return [np.power((1/a)*np.log(2-dim/2), (1/b))]
+        else: 
+            return None
 
-while i < len(set_of_bins):
-    bk = set_of_bins[i]
-    p = set_of_p[i]
-    E = abs(np.ceil(np.random.rand(9, 9) - p))
-    dim = dim_root_estimate(E)
-    
-    if dim >= bk[0] and dim <= bk[1]:
-        set_of_E[i].append(E)
-        set_of_dims.append(dim)
-    
-    if len(set_of_E[i]) >= l:
-        i += 1
-        print(bk)
-        
- 
-plt.plot(set_of_dims)
+    k = 10
+    l = 1000
+    set_of_bins = bins(k)
+    set_of_p = [inv_avg_dim_9(bk[0] + 1/k) for bk in set_of_bins]
+    set_of_E = [[] for i in range(k)]
+    set_of_dims = []
+    i=1 #skip the first bin because it's just all zeroes
+
+    while i < len(set_of_bins):
+        bk = set_of_bins[i]
+        p = set_of_p[i]
+        E = abs(np.ceil(np.random.rand(9, 9) - p))
+        dim = dim_root_estimate(E)
+
+        if dim >= bk[0] and dim <= bk[1]:
+            set_of_E[i].append(E)
+            set_of_dims.append(dim)
+
+        if len(set_of_E[i]) >= l:
+            i += 1
+            print(bk)
 
 
-loaded_file = open('base_9_inverse_problem_data/edge_matrices.pkl', 'wb') 
-pickle.dump(np.asarray(set_of_E), loaded_file)
-loaded_file.close()
+    plt.plot(set_of_dims)
 
-loaded_file = open('base_9_inverse_problem_data/dimensions.pkl', 'wb') 
-pickle.dump(np.asarray(set_of_dims), loaded_file)
-loaded_file.close()
-"""
+
+    loaded_file = open('base_9_inverse_problem_data/edge_matrices.pkl', 'wb') 
+    pickle.dump(np.asarray(set_of_E), loaded_file)
+    loaded_file.close()
+
+    loaded_file = open('base_9_inverse_problem_data/dimensions.pkl', 'wb') 
+    pickle.dump(np.asarray(set_of_dims), loaded_file)
+    loaded_file.close()
+
 
 
 
