@@ -8,9 +8,8 @@ from progress_bar import progressbar
 class base9data():
     '''
     Here's my attempt to make a class that handles the drawing of
-        base 9 matrix data. I see myself using this in the future when creating
-        images from matrices (where the model does the opposite). It would be bad
-        to call this the inverse inverse model ;) 
+        base 9 matrix data. Takes the 9x9 binary matrics, e0, and outputs the
+        fractal encoded by e0. 
     '''
     e0 = []
     size = 700
